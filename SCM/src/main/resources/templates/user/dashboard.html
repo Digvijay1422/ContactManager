@@ -1,0 +1,40 @@
+
+
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{base :: parent(~{::#content},~{title},~{script})}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.css"
+      rel="stylesheet"
+    />
+
+    <title data-th-text="${loggedInUser.name}"></title>
+  </head>
+  <body>
+    <div id="content">
+      <div th:if="${loggedInUser}">
+        <div data-th-replace="~{user/sidebar::user_sidebar}"></div>
+      </div>
+      <div
+        th-data-fragment="content"
+        class="pt-24  w-1/2 p-5 h-200 flex flex-col"
+        style="padding-left: 270px"
+      >
+        <h1>Dashboard Page</h1>
+
+
+
+        
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
+  </body>
+</html>

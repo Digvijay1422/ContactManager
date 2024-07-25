@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html
+lang="en"
+xmlns:th="http://www.thymeleaf.org"
+th:replace="~{base :: parent(~{::#content},~{title},~{script})}"
+>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.css"
+      rel="stylesheet"
+      />
+      
+      <title data-th-text="${loggedInUser.name}"></title>
+    </head>
+    <body>
+      <div id="content">
+      <div th:if="${loggedInUser}">
+        <div data-th-replace="~{user/sidebar::user_sidebar}"></div>
+      </div>
+      <div
+      th-data-fragment="content"
+      class="pt-24 md:pl-36 h-200 flex flex-col"
+      
+      >
+      <div  class="grid grid-cols-12">
+          <div class="col-span-3"></div>
+          <div class="col-span-12 md:col-span-6">
+            <div class="card" style="width: 600px;">
+              <div
+              
+              class="block  p-6 bg-white border border-gray-200 rounded-lg shadow  dark:bg-gray-800 dark:border-gray-700 "
+              >
+              <div data-th-replace="~{message::messageBox}"></div>
+              
+                <h5
+                  class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
+                >
+                  Add New Contact
+                </h5>
+                <p class="text-gray-500">
+                  This contact will be saved on cloud...
+                </p>
+                <form  class="mt-5" 
+                  data-th-action="@{'/user/contacts/add'}"       
+                  method="post"
+                  novalidate
+                  data-th-object="${form}"
+                  enctype="multipart/form-data"
+                  >
+                  <div>
+                    <label
+                      for="name"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Contact Name</label
+                      >
+                    <div class="relative mb-6">
+                      <div
+                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
+                      >
+                      <i class="fa-regular fa-user"></i>
+                    </div>
+                    <input
+                        type="text"
+                        id="name"
+                        data-th-field="*{name}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Enter the name..."
+                        required
+                      />
+                      <p class="text-red-600 px-1 py-2"
+                      data-th-if="${#fields.hasErrors('name')}"
+                      data-th-errors="*{name}"
+                    ></p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label
+                      for="email"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Email</label
+                    >
+                    <div class="relative mb-6">
+                      <div
+                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
+                      >
+                      <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 16">
+                        <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                        <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                    </svg>
+                      </div>
+                      <input
+                        type="email"
+                        id="email"
+                        data-th-field="*{email}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="name@gmail.com"
+                        required
+                        />
+                      </div>
+                  </div>
+
+                  <div>
+                    <label
+                      for="phone"
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Phone Number</label
+                      >
+                    <div class="relative mb-6">
+                      <div
+                      class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
+                      >
+                      <i class="fa-solid fa-phone-volume"></i>
+                      </div>
+                      <input
+                      type="text"
+                        id="phone"
+                        data-th-field="*{phone}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder=""
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    
+                    <label  for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
+                    <textarea data-th-field="*{address}" id="address"
+                    required rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Address.."></textarea>
+                    
+                  </div>
+
+                  <div>
+                    
+                    <label for="description" class="block mt-6 mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                    <textarea data-th-field="*{description}"
+                    required id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write about you"></textarea>
+
+                  </div>
+
+                  <!-- Links  -->
+                  <div class="flex space-x-3" >
+                    <div class="w-full">
+
+                        <div>
+                            
+                            <div class="relative mb-6 mt-6">
+                              <div
+                                class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
+                              >
+                              <i class="fa-brands fa-facebook"></i>                              </div>
+                              <input
+                                type="text"
+                                id="websiteLink"
+                                data-th-field="*{websiteLink}"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder=""
+                              />
+                            </div>
+                          </div>
+                    </div>
+                    <div class="w-full">
+
+                        <div class="w-full">
+
+                            <div>
+                                
+                                <div class="relative mb-6 mt-6">
+                                  <div
+                                    class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none"
+                                  >
+                                  <i class="fa-brands fa-linkedin"></i>                             
+                                    </div>
+                                  <input
+                                    type="text"
+                                    id="linkedinLink"
+                                    data-th-field="*{linkedinLink}"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder=""
+                                  />
+                                </div>
+                              </div>
+                        </div>
+
+                    </div>
+
+                  </div>
+
+                  <!-- picture  -->
+                  <div>
+                    
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="picture">Upload Photo</label>
+                    <input  data-th-field="*{picture}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="img_file_input" type="file">
+                    <p class="mt-1  mb-6 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX. 800x400px).</p>
+
+                    <img src="" id="upload_img_preview" alt="">
+                  </div>
+
+                  <!-- CheckBox  -->
+                  <div class="flex items-center mt-2 mb-4">
+                    <input
+                    data-th-field="*{favorite}" id="fsv" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <label for="fsv" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Favourite</label>
+                </div>
+
+                <div class="button_container flex items-center justify-center space-x-2">
+
+                    <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Cocntact</button>
+                    <button type="reset" class="focus:outline-none text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Reset</button>
+
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script data-th-src="@{'/js/admin.js'}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
+    
+    </div>
+    
+  </body>
+  
+</html>

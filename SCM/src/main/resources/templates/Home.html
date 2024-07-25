@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: parent(~{::#content},~{title},~{script})}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" data-th-href="@{'/css/output.css'}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.css" rel="stylesheet" />
+
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="content">
+
+        <div th-data-fragment="content" class=" text-2xl w-1/2 p-5 flex flex-col mx-auto items-center ">
+            
+            
+            
+            <h class="font-bold " data-th-text="${name}">This is home </h>
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus ab voluptate non
+             earum eveniet ipsa minus quos incidunt iste suscipit commodi vel 
+             voluptatum repellat deleniti ipsam rerum mollitia reprehenderit optio unde, \
+             harum officia maiores est ipsum. Perspiciatis vitae, impedit dolorum eum, 
+             aut iure assumenda voluptas est omnis explicabo recusandae. Quis.</p>
+             
+             <div>
+                 
+                 <button class="bg-blue-700 rounded px-3 py-3 text-white hover:bg-blue-500">Click here</button>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
+
+
+</body>
+</html>
