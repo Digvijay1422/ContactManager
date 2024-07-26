@@ -1,5 +1,3 @@
-// // import { Modal } from 'flowbite';
-
 
 // const $modalElement = document.querySelector('#modalEl');
 
@@ -27,7 +25,7 @@
 // };
 
 // let modal = new Modal($modalElement, modalOptions, instanceOptions);
-
+const modal = new Modal()
 // function openContactModal()
 // {
 

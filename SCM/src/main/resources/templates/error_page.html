@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base :: parent(~{::#content},~{title},~{script})}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" data-th-href="@{'/css/output.css'}">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.css" rel="stylesheet" />
+        
+        <title>Document</title>
+    </head>
+    <body>
+        
+        <div id="content">
+            
+            <div style="margin-top: 50px;" th-data-fragment="content" class=" text-2xl  p-5 flex flex-col mx-auto items-center ">
+                
+                
+                
+                <h class="font-bold  mt-14 mb-4" data-th-text="${name}">This is home </h>
+            
+                <div data-th-replace="~{message::messageBox}"></div>
+                <div class="mt-7">
+                    <a data-th-href="@{'/login'}" class="bg-blue-700 rounded px-3 py-3 text-white hover:bg-blue-500">Login</a>
+                </div>
+                </div>
+        </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
+
+
+</body>
+</html>

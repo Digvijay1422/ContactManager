@@ -31,13 +31,16 @@
         <p class="text-gray-400 pt-2" data-th-text="${contacts.totalElements}+' Results Found'"></p>
       </div>
 
-        <div class="container">
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div class="container">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="flex justify-between bg-white dark:bg-gray-900">
             <form
             data-th-object="${contactSearchForm}"
             data-th-action="@{'/user/contacts/search'}" method="get">
+
+
               <div
-                class="flex items-center space-x-4 justify-start flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900"
+              class="flex items-center space-x-4 justify-start flex-column md:flex-row flex-wrap space-y-4 md:space-y-0 py-4 bg-white dark:bg-gray-900"
               >
                 <!-- Search box -->
                 <div class="pl-3">
@@ -47,7 +50,7 @@
                     id="underline_select"
                     class="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-400 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
                   >
-                    <option selected value="">Select a field</option>
+                  <option selected value="">Select a field</option>
                     <option value="name">Name</option>
                     <option value="email">Email</option>
                     <option value="phone">Phone</option>
@@ -57,7 +60,7 @@
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative">
                   <div
-                    class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none"
+                  class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none"
                   >
                     <svg
                       class="w-4 h-4 text-gray-500 dark:text-gray-400"
@@ -67,7 +70,7 @@
                       viewBox="0 0 20 20"
                     >
                       <path
-                        stroke="currentColor"
+                      stroke="currentColor"
                         stroke-linecap="round"
                         stroke-linejoin="round"
                         stroke-width="2"
@@ -81,9 +84,9 @@
                     id="table-search-users"
                     class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Search for users"
-                  />
-                </div>
-                <button
+                    />
+                  </div>
+                  <button
                   type="submit"
                   class="px-4 py-2 dark:bg-gray-600 text-white bg-blue-500 rounded-md"
                 >
@@ -91,8 +94,20 @@
                 </button>
               </div>
             </form>
+            <div>
+
+              <button
+              type="button"
+              onclick="exportData()"
+            class="px-4 py-2  mt-4 mr-3 space-x-4 space-y-4 dark:bg-green-600 text-white bg-green-500 rounded-md"
+                >
+                Export
+                </button>
+              </div>
+            </div>
 
             <table
+            id="contact-table"
             data-th-unless="${contacts.empty}"
               class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
             >
@@ -211,6 +226,20 @@
             <h1 
             data-th-if="${contacts.empty}"
             class="text-5xl text-black p-5 text-center dark:text-white">No Result Found!!</h1>
+
+            <script src="https://cdn.jsdelivr.net/npm/@linways/table-to-excel@1.0.4/dist/tableToExcel.min.js"></script>
+
+            <script>
+
+              function exportData(){
+                TableToExcel.convert(document.getElementById("contact-table"), {
+                    name: "contacts.xlsx",
+                    sheet: {
+                      name: "Sheet 1"
+                    }
+                  });        }
+              
+            </script>
           </div>
         </div>
       </div>

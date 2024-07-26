@@ -29,7 +29,6 @@ public class EmailServiceImpl implements EmailService{
             msg.setSubject(sub);
             msg.setText(body);
             msg.setFrom("demo@demomailtrap.com");
-            
             mailSender.send(msg);
             System.out.println("Sent");
         } catch (Exception e) {

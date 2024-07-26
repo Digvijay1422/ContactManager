@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 
 import com.test.entities.User;
 import com.test.helper.AppConstants;
+import com.test.helper.Helper;
 import com.test.helper.ResouceNotFoundException;
 import com.test.repo.UserRepo;
+import com.test.services.EmailService;
 import com.test.services.UserService;
 
 
@@ -27,6 +29,9 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private EmailService emailService;
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     
@@ -37,8 +42,12 @@ public class UserServiceImpl implements UserService{
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoleList(List.of(AppConstants.ROLE_USER));
         logger.info(user.getProvider().toString());
-        
-        return userRepo.save(user);
+        String emailToken = UUID.randomUUID().toString();
+        user.setEmailToken(emailToken);
+        String emailLink = Helper.getEmailVerifyLink(emailToken);
+        User savedUser =  userRepo.save(user);
+        emailService.sendEmail(savedUser.getEmail(), "Verify Account : Verify Contact Manager", emailLink);
+        return savedUser;
     }
 
     

@@ -48,7 +48,17 @@ public class User implements UserDetails{
     private boolean phoneVerified;
 
 	private String emailToken;
-    //Self, google,facebook
+    public String getEmailToken() {
+		return emailToken;
+	}
+
+
+	public void setEmailToken(String emailToken) {
+		this.emailToken = emailToken;
+	}
+
+
+	//Self, google,facebook
     @Enumerated(value = EnumType.STRING)
     private Providers provider = Providers.Self;
     private String providerUserId;
